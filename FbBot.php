@@ -132,14 +132,18 @@ class FbBot
                 //$answer = ["text" => "Hola ".$datos->first_name."! ¿Cómo te encuentras el día de hoy?", "quick_replies" => [["content_type" => "text", "title" => "Muy bien!","payload" => "bien" ],["content_type" => "text", "title" => "Meeeh", "payload" => "bien" ]]];
             }elseif (!empty($messageText)){
                  //$answer = ["text" => 'Una disculpa, no me queda muy claro lo que necesitas, por favor selecciona una de las siguientes opciones o “Hablar con una persona” para contactar a soporte.', "quick_replies" => [["content_type" => "text", "title" => "Hablar con persona","payload" => "humano" ],["content_type" => "text", "title" => "Quiero registrarme","payload" => "registro" ],["content_type" => "text", "title" => "¿Cuánto cuesta?", "payload" => "costo"],["content_type" => "text", "title" => "¿Qué ofrecen?", "payload" => "funcionalidades"]]];
-              $answer = "Escribe bien prro :v",
-                $response = ['recipient' => ['id' => $senderId], 'message' => $answer, 'access_token' => $this->accessToken];
+              $jsonData = '{
+                     "recipient":{
+                     "id": "'.$senderId.'"
+                     },
+                     "message":{
+                     "text":"No entiendo lo que dices! Por favor intenta de nuevo"
+                     }
+                    }';
+                $this->send($jsonData);
                 error_log(print_r($response,true));
-            }
-
-            
-            $response = $client->post($url, ['query' => $response, 'headers' => $header]);
-            return true;
+            }            
+           return true;
         }
         catch(RequestException $e)
         {
