@@ -152,7 +152,7 @@ class FbBot
             return $response;
         }
     }
-
+ //funcion para enviar mensajes a la api 
     public function send($jsonData){
         $url = 'https://graph.facebook.com/v2.6/me/messages?access_token='.$this->$accessToken;
         $ch = curl_init($url);
